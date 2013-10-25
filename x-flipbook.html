@@ -1,6 +1,13 @@
 <polymer-element name="x-flipbook">
   <style>
-    img { width:10px; height:10px }
+    template {
+      word-wrap: break-word;
+      overflow-x: scroll;
+    }
+    img {
+      float: left;
+      height: 100%;
+    }
   </style>
   <template>
     <content></content>
