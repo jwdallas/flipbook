@@ -1,5 +1,3 @@
 flipbook
 ========
-Web component (utilizing Polyner polyfill) for creating flipbooks based on horizontal scrolling.
-
-Checkout the working demo: http://jwdallas.github.io/flipbook/
+Web component (utilizing Polymer polyfill) for creating simple flipbooks based on horizontal scrolling.
