@@ -17,30 +17,32 @@
     </figure>
   </template>
   <script>
-    Polymer("x-flipbook");
-    
-    var imgs = $('img'),
-        numOfFrames = imgs.length;
-        imgWidth = imgs.width(),
-        imgHeight = imgs.height();
+    Polymer("x-flipbook", {
+      created: function init() {
+        var imgs = $('img'),
+            numOfFrames = imgs.length,
+            imgWidth = imgs.width(),
+            imgHeight = imgs.height();
 
-    // set flipbook viewport size
-    $('figure').css('width', imgWidth)
-               .css('height', imgHeight);
+        // set flipbook viewport size
+        $('figure').css('width', imgWidth)
+                   .css('height', imgHeight);
 
-    // set width of scrollable content
-    $('span').css('width', imgWidth*numOfFrames);
+        // set width of scrollable content
+        $('span').css('width', imgWidth*numOfFrames);
 
-    // show first frame at load
-    imgs.eq(0).addClass('currentFrame');
+        // show first frame at load
+        imgs.eq(0).addClass('currentFrame');
 
-    // when scrolling apply magic
-    $('figure').scroll(function() {
-      var dist = $(this).scrollLeft();
-      var frame = parseInt(dist/imgWidth, 10);
-      imgs.removeClass()
-          .eq(frame)
-          .addClass('currentFrame');
+        // apply magic
+        $('figure').scroll(function flip() {
+          var dist = $(this).scrollLeft();
+          var currentFrameNumber = parseInt(dist/imgWidth, 10);
+          imgs.removeClass()
+              .eq(currentFrameNumber)
+              .addClass('currentFrame');
+        }); 
+      }
     });
   </script>
 </polymer-element>
