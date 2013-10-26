@@ -1,18 +1,46 @@
 <polymer-element name="x-flipbook">
   <style>
-    template {
-      word-wrap: break-word;
-      overflow-x: scroll;
-    }
-    img {
-      float: left;
-      height: 100%;
-    }
+  * { margin:0; padding:0 }
+  
+  figure { overflow-x:scroll; position:relative; opacity:0 }
+  span { display:inline-block }
+  img { position:absolute; opacity:0 }
+  .currentFrame { opacity:1 }
+  
+  template:hover { cursor:ew-resize }
+  
   </style>
   <template>
     <content></content>
+    <figure>
+      <span></span>
+    </figure>
   </template>
   <script>
     Polymer("x-flipbook");
+    
+    var imgs = $('img'),
+        numOfFrames = imgs.length;
+        imgWidth = imgs.width(),
+        imgHeight = imgs.height();
+
+    // set flipbook viewport size
+    $('figure').css('width', imgWidth)
+               .css('height', imgHeight);
+
+    // set width of scrollable content
+    $('span').css('width', imgWidth*numOfFrames);
+
+    // show first frame at load
+    imgs.eq(0).addClass('currentFrame');
+
+    // when scrolling apply magic
+    $('figure').scroll(function() {
+      var dist = $(this).scrollLeft();
+      var frame = parseInt(dist/imgWidth, 10);
+      imgs.removeClass()
+          .eq(frame)
+          .addClass('currentFrame');
+    });
   </script>
 </polymer-element>
