@@ -10,8 +10,8 @@
   </style>
   <template>
     <content></content>
-    <figure>
-      <span></span>
+    <figure id="flipbook">
+      <span id="scroll-strip"></span>
     </figure>
   </template>
   <script src="jquery-2.0.3.min.js"></script>
@@ -22,23 +22,19 @@
             numOfFrames = imgs.length,
             imgWidth = imgs.width(),
             imgHeight = imgs.height();
-
-        console.log('imgWidth: ' + imgWidth);
-        console.log('imgHeight: ' + imgHeight);
-        console.log('numOfFrames: ' + numOfFrames);
         
         // set flipbook viewport size
-        $('figure').css('width', imgWidth)
-                   .css('height', imgHeight);
+        $('#flipbook').css('width', imgWidth)
+                      .css('height', imgHeight);
 
-        // set width of scrollable content
-        $('span').css('width', imgWidth*numOfFrames);
+        // set length of scroll strip
+        $('#scroll-strip').css('width', imgWidth*numOfFrames);
 
         // show first frame at load
         imgs.eq(0).addClass('currentFrame');
 
         // apply magic
-        $('figure').scroll(function flip() {
+        $('#flipbook').scroll(function flip() {
           var dist = $(this).scrollLeft();
           var currentFrameNumber = parseInt(dist/imgWidth, 10);
           imgs.removeClass()
